@@ -1,4 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// Definições padrão
+*{
+  padding: 0;
+  margin: 0;
+}
+
+// Margin top
+.mt-20 {
+   margin-top: 20px;
+}
+.mt-60 {
+   margin-top: 60px;
+}
+.mt-40 {
+   margin-top: 40px;
+}
+.ml-5 {
+   margin-left: 5px;
+}
+
+// Tamanhos
+.full-width {
+ width: 100%;
+}
