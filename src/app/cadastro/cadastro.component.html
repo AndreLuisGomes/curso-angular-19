@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="center">
     <div fxlayout="column" fxFlex="1000px">
-        <form class="mt-60" #clientsFrm=""ngForm>
+        <form class="mt-60" #clientsFrm="ngForm" (ngSubmit)="salvar()">
             <mat-card>
                 <mat-card-header>
                     <mat-card-title>Dados Pessoais</mat-card-title>
@@ -55,16 +55,16 @@
                     </div>
 
                     <mat-card-actions>
-                        <button class="botao_salvar" mat-flat-button color="accent">
+                        <button class="botao" mat-flat-button color="primary" type="submit" >
                             <mat-icon fontIcon="save"></mat-icon>
                             Salvar
                         </button>
-                        <button class="botao_salvar" mat-flat-button class="ml-5" color="accent">
+                        <button mat-flat-button class="ml-5 botao" color="primary">
                             <mat-icon fontIcon="refresh"></mat-icon>
                             Atualizar
                         </button>
             
-                        <button class="botao_salvar" mat-flat-button class="ml-5" color="primary">
+                        <button mat-flat-button class="ml-5 botao_backspace" color="accent">
                             <mat-icon fontIcon="backspace"></mat-icon>
                             Limpar
                         </button>
