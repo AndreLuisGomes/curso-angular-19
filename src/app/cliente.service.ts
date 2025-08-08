@@ -12,10 +12,30 @@ export class ClienteService {
   constructor() { }
 
   salvar(cliente: Cliente){
-    console.log(cliente);
+    const storage = this.obterStorage();
+    storage.push(cliente);
+
+    localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(storage));
   }
 
-  obterStorage() : Cliente[]{
+  pesquisarClientes(nomeBusca: string) : Cliente[]{
+
+    const clientes = this.obterStorage();
+
+    if(!nomeBusca){
+      return clientes;
+    }
+
+    nomeBusca = nomeBusca.toLowerCase();
+    return clientes.filter(cliente => cliente.nome?.toLowerCase().indexOf(nomeBusca) !== -1) 
+  } 
+
+  buscarClientesPorId(id: string) : Cliente | undefined{
+    const clientes = this.obterStorage();
+    return clientes.find(cliente => cliente.id === id)
+  }
+
+  private obterStorage() : Cliente[]{
     const repositorioClientes = localStorage.getItem(ClienteService.REPO_CLIENTES);
     if(repositorioClientes){
       const clientes: Cliente[] = JSON.parse(repositorioClientes);
