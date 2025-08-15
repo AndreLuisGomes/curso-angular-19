@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
     FlexLayoutModule,
     FormsModule,
     MatButton,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './consulta.component.html',
   styleUrl: './consulta.component.scss'
@@ -49,6 +49,19 @@ export class ConsultaComponent implements OnInit {
 
   preparaEditar(id: string){
     this.router.navigate( ['/cadastro'], {queryParams: {"id" : id} } )
+  }
+
+  deletar(cliente: Cliente){
+    this.service.deletar(cliente);
+    this.ngOnInit()
+  }
+  
+  preparaDeletar(cliente: Cliente){
+    cliente.deletando = true;
+  }
+
+  cancelarDeletar(cliente: Cliente){
+    cliente.deletando = false;
   }
   
 }

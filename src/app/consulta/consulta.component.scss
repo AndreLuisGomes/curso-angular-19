@@ -1,0 +1,33 @@
+mat-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+ng-container td, th{    
+    text-align: center;
+}
+
+.mat-column-id {
+  width: 50%;
+}
+
+.mat-column-nome {
+  width: 10%;
+}
+
+.mat-column-email {
+  width: 10%;
+}
+
+.mat-column-telefone {
+  width: 10%;
+}
+
+.mat-column-dataNascimento {
+  width: 20%;
+}
+
+.mat-column-acoes {
+  width: 10%;
+  text-align: center;
+}

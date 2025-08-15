@@ -6,7 +6,8 @@ export class Cliente{
     cpf?: string;
     dataNascimento?: string;
     email?: string;
-
+    deletando: boolean = false;
+    
     static newCliente(){
         const cliente = new Cliente();
         cliente.id  = uuid();
