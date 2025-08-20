@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Cliente } from './cadastro/cliente';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,8 @@ import { Cliente } from './cadastro/cliente';
 
 export class ClienteService {
 
-  static REPO_CLIENTES = "_CLIENTES"
+  static REPO_CLIENTES = "_CLIENTES";
+  snack: MatSnackBar = inject(MatSnackBar);
 
   constructor() { }
 
@@ -58,11 +61,9 @@ export class ClienteService {
   }
   
   deletar(cliente : Cliente){
-
+    this.snack.open('Deletado com sucesso!', 'OK!');
     const storage = this.obterStorage();
-
     const novaLista = storage.filter(c => c.id !== cliente.id);
-
     localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(novaLista));
   }
 }

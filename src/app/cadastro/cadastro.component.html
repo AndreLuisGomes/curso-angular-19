@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="center">
-    <div fxlayout="column" fxFlex="1000px">
+    <div fxLayout="column" fxFlex="1000px">
         <form class="mt-60" #clientsFrm="ngForm" (ngSubmit)="salvar()">
             <mat-card>
                 <mat-card-header>
@@ -34,7 +34,7 @@
                         <div fxLayout="column" fxFlex="400px">
                             <mat-form-field class="full-width">
                                 <mat-label>CPF: *</mat-label>
-                                <input type="number" 
+                                <input type="text" 
                                     [(ngModel)]="cliente.cpf"
                                     name="cpf"
                                     mask="000.000.000-00"
@@ -47,7 +47,7 @@
                         <div fxLayout="column" fxFlex="400px">
                             <mat-form-field class="full-width">
                                 <mat-label>Data Nascimento: *</mat-label>
-                                <input type="number" 
+                                <input type="text" 
                                     [(ngModel)]="cliente.dataNascimento"
                                     name="dataNascimento"
                                     mask="00/00/0000"
@@ -55,26 +55,53 @@
                             </mat-form-field>
                         </div>
                     </div>
+        
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="16px">
+                        <div fxLayout="column" fxFlex="400px">
+                            <mat-form-field class="full-width">
+                                <mat-label>UFs: *</mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let uf of estados" [value]="uf.sigla">
+                                        {{ uf.nome }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="16px">
+                        <div fxLayout="column" fxFlex="400px">
+                            <mat-form-field class="full-width">
+                                <mat-label>Municipio: *</mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let municipio of municipios" [value]="municipio.nome">
+                                        {{ municipio.nome }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
 
-                    <mat-card-actions>
-                        @if(!atualizando){
-                            <button class="botao" mat-flat-button color="primary" type="submit" >
-                                <mat-icon fontIcon="save"></mat-icon>
-                                Salvar
-                            </button>
-                        }@else{
-                            <button mat-flat-button class="ml-5 botao" color="primary">
-                                <mat-icon fontIcon="refresh"></mat-icon>
-                                Atualizar
-                            </button>
-                        }
-            
-                        <button mat-flat-button class="ml-5 botao_backspace" color="accent">
-                            <mat-icon fontIcon="backspace"></mat-icon>
-                            Limpar
-                        </button>
-                    </mat-card-actions>
                 </mat-card-content>
+                
+                <mat-card-actions>
+                    @if(!atualizando){
+                        <button class="botao ml-5s" mat-flat-button color="primary" type="submit" >
+                            <mat-icon fontIcon="save"></mat-icon>
+                            Salvar
+                        </button>
+                    }@else{
+                        <button mat-flat-button class="ml-5 botao" color="primary" type="submit">
+                            <mat-icon fontIcon="refresh"></mat-icon>
+                            Atualizar
+                        </button>
+                    }
+        
+                    <button mat-flat-button class="ml-5 botao_backspace" color="accent">
+                        <mat-icon fontIcon="backspace"></mat-icon>
+                        Limpar
+                    </button>
+                </mat-card-actions>
             </mat-card>
         </form>
     </div>
