@@ -36,7 +36,7 @@ export class ConsultaComponent implements OnInit {
 
   nomeBusca: string = "";
   listaClientes: Cliente[] = [];
-  colunasTable: string[] = ["id", "nome", "cpf", "dataNascimento", "email", "acoes"];
+  colunasTable: string[] = ["id", "nome", "cpf", "dataNascimento", "email", "uf", "acoes"];
 
   constructor(
     private service: ClienteService,
@@ -63,7 +63,6 @@ export class ConsultaComponent implements OnInit {
     if(!cpf || cpf.length !== 11) return cpf;
     
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
   }
 
   pesquisar(){
@@ -86,5 +85,4 @@ export class ConsultaComponent implements OnInit {
   cancelarDeletar(cliente: Cliente){
     cliente.deletando = false;
   }
-  
 }

@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxMaskDirective, provideNgxMask} from 'ngx-mask';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 
 // Services:
 
@@ -70,6 +70,10 @@ export class CadastroComponent implements OnInit{
         if(clienteEncontrado){
           this.atualizando = true;
           this.cliente = clienteEncontrado;
+          if(this.cliente.uf){
+            const event ={ value: this.cliente.uf}
+            this.carregarMunicipios(event as MatSelectChange);
+          }
         }
       }
     })
@@ -80,12 +84,12 @@ export class CadastroComponent implements OnInit{
   salvar(){
     if(!this.atualizando){
       this.service.salvar(this.cliente);
-      this.mostrarMensagem('Salvo com sucesso!');
+      this.mostrarMensagem('Salvo com sucesso!', 'OK');
       this.cliente = Cliente.newCliente();
     } else{
       this.service.atualizar(this.cliente)
       this.router.navigate(['/consulta'])
-      this.mostrarMensagem('Atualizado com sucesso!');
+      this.mostrarMensagem('Atualizado com sucesso!', 'OK');
     }
   }
 
@@ -96,7 +100,32 @@ export class CadastroComponent implements OnInit{
     })
   }
 
-  mostrarMensagem(mensagem: string){
-    this.snack.open(mensagem, 'OK!');
+  carregarMunicipios(event: MatSelectChange){
+    const ufSelecionada = event.value;
+    this.brasilApiService.listarMunicipios(ufSelecionada).subscribe({
+      next: listaMunicipio => this.municipios = listaMunicipio,
+      error: erro => console.log('Ocorreu um erro: ', erro)
+    })
+  }
+
+  preparaResetForm(form: any){
+    if(form){
+      this.cliente.preparaResetar = true;
+    }
+    this.mostrarMensagem('Não há dados para resetar!', 'OK')
+  }
+
+  resetForm(form: any){
+    if(this.cliente.preparaResetar){
+      form.resetForm();
+      const id = this.cliente.id;
+      this.cliente = Cliente.newCliente();
+      this.cliente.id = id;
+      this.mostrarMensagem("Formulário Resetado!", "OK");
+    }
+  }
+
+  mostrarMensagem(mensagem: string, segundaMensagem? : string){
+    this.snack.open(mensagem, segundaMensagem);
   }
 }

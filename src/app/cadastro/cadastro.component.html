@@ -60,7 +60,7 @@
                         <div fxLayout="column" fxFlex="400px">
                             <mat-form-field class="full-width">
                                 <mat-label>UFs: *</mat-label>
-                                <mat-select>
+                                <mat-select name="uf" [(value)]="cliente.uf" (selectionChange)="carregarMunicipios($event)">
                                     <mat-option *ngFor="let uf of estados" [value]="uf.sigla">
                                         {{ uf.nome }}
                                     </mat-option>
@@ -73,7 +73,7 @@
                         <div fxLayout="column" fxFlex="400px">
                             <mat-form-field class="full-width">
                                 <mat-label>Municipio: *</mat-label>
-                                <mat-select>
+                                <mat-select name="municipio" [(value)]="cliente.municipio">
                                     <mat-option *ngFor="let municipio of municipios" [value]="municipio.nome">
                                         {{ municipio.nome }}
                                     </mat-option>
@@ -96,11 +96,16 @@
                             Atualizar
                         </button>
                     }
-        
-                    <button mat-flat-button class="ml-5 botao_backspace" color="accent">
-                        <mat-icon fontIcon="backspace"></mat-icon>
-                        Limpar
-                    </button>
+                    @if(cliente.preparaResetar){
+                        <button mat-flat-button class="ml-5 botao_backspace" type="button" (click)="resetForm(clientsFrm)" color="accent">
+                            Confirmar
+                        </button>
+                    }@else {
+                        <button mat-flat-button class="ml-5 botao_backspace" type="button" (click)="preparaResetForm(cliente)" color="accent">
+                            <mat-icon fontIcon="backspace"></mat-icon>
+                            Limpar
+                        </button>
+                    }
                 </mat-card-actions>
             </mat-card>
         </form>

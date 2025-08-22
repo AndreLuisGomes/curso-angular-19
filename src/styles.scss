@@ -23,3 +23,23 @@
 .full-width {
  width: 100%;
 }
+
+a{
+   border-radius: 5px;
+   display: flex;
+   justify-content: center;
+   gap: 8px;
+   padding: 8px;
+   margin-left: 20px;
+   justify-items: center;
+   align-items: center;
+   justify-content: center;
+   text-decoration: none;
+   color: #fff;
+}
+
+a.mat-button:active,
+a.mat-list-item:active {
+  opacity: 0.6; /* fica mais transparente ao clicar */
+  transition: opacity 0.2s;
+}
